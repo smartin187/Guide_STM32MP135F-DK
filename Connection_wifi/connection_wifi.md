@@ -1,10 +1,10 @@
-# Connecter le STM32 au wifi
+# Connecter le STM32 au Wi-Fi
 
-Guide pour connecter le STM32 au wifi.
+Guide pour connecter le STM32 au Wi-Fi.
 
 ## Fichier de configuration
 
-Crée ou remplacer le fichier de configuration : `/etc/wpa_supplicant.conf`.
+Créez ou remplacez le fichier de configuration `/etc/wpa_supplicant.conf`.
 
 ```wpa_supplicant.conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=weston
@@ -19,22 +19,22 @@ network={
 }
 ```
 
->remplacer `GROUP=weston` dans le cas où vous avez modifier les groups, sinon garder telquel.
+> Remplacez `GROUP=weston` si vous avez modifié les groupes. Sinon, gardez cette valeur telle quelle.
 
 ## Lancement manuel
 
-Exécuter les commandes suivantes en adimistrateur (`su`) :
+Exécutez les commandes suivantes en tant qu'administrateur (`su`) :
 
-- `wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf` (utilisation du fichier de configuration pour connection)
-- `udhcpc -i wlan0` (création d'adress IP)
+- `wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf` (utilisation du fichier de configuration pour la connexion)
+- `udhcpc -i wlan0` (obtention d'une adresse IP)
 
-Vous devez être connecter, tester avec `ping`.
+Vous devriez être connecté. Testez la connexion avec `ping`.
 
 ## Lancement automatique
 
-Avec le [lancement manuel](#lancement-manuel), la connection est perdu a chaque redémarage.
+Avec le [lancement manuel](#lancement-manuel), la connexion est perdue à chaque redémarrage.
 
-Pour lancer automatiquement, créer le fichier `/etc/rc.local` :
+Pour lancer la connexion automatiquement, créez le fichier `/etc/rc.local` :
 
 ```bash
 #!/bin/bash
@@ -43,7 +43,7 @@ su -c "udhcpc -i wlan0"
 exit 0
 ```
 
-Si le fichier existe déjà, ajouter les deux lignes avant `exit 0`.
+Si le fichier existe déjà, ajoutez les deux lignes avant `exit 0`.
 
-Redémarrer le STM32, atender quelques secondes pour la connection et vérifier avec `ping`.
+Redémarrez le STM32, attendez quelques secondes que la connexion soit établie, puis vérifiez-la avec `ping`.
 

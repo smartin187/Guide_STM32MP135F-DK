@@ -1,6 +1,6 @@
-# Outil utiles
+# Outils utiles
 
-Dans ce chapitre vous allez pouvoir installer quelque outil (applications) pour faciliter l'utilisation.
+Dans ce chapitre, vous allez pouvoir installer quelques outils (applications) pour faciliter l'utilisation du système.
 
 Nous allons installer :
 - [`nano`](#installation-de-nano)
@@ -9,52 +9,52 @@ Nous allons installer :
 
 ## Installation de Nano
 
-Nano est un éditeur de texte en ligne de commande. Par défaut sur le STM32, `vi` est installer. Nano est plus simple a utiliser pour les débutants.
+Nano est un éditeur de texte en ligne de commande. Par défaut, sur le STM32, `vi` est installé. Nano est plus simple à utiliser pour les débutants.
 
-> Nano pourra aussi vous être utile si vous shouhaitez programmer sur le STM32 (légère coloration syntaxique).
+> Nano pourra également vous être utile si vous souhaitez programmer sur le STM32 (il propose une légère coloration syntaxique).
 
-Installer Nano via `apt`.
+Installez Nano via `apt`.
 
 ```bash
-su # metter cette commande pour passer en root
+su # utilisez cette commande pour passer en root
 
-apt update # optionnel, si vous n'avez pas fait de mise a jour depuis longtemps
+apt update # facultatif, si vous n'avez pas effectué de mise à jour depuis longtemps
 
 apt install nano
 ```
 
-Après, vous pouvez écrire la comande `nano`.
+Vous pouvez ensuite saisir la commande `nano`.
 
-Dans l'éditeur, tout les raccourcis clavier (enregistrer, quitter...) sont écrit.
+Dans l'éditeur, tous les raccourcis clavier (enregistrer, quitter, etc.) sont indiqués.
 
 
 ## Installation de Pip
 
-Pip est un gestionnaire de paquet pour Python. Il permet d'installer des librairies Python.
+Pip est un gestionnaire de paquets pour Python. Il permet d'installer des bibliothèques Python.
 
-> En général, il est possible d'installer des librairies Python sans `pip` mais via `apt`, en faisant la commande : `apt install python3-<librairie python>`.
+> En général, il est possible d'installer des bibliothèques Python sans `pip`, mais via `apt`, avec la commande `apt install python3-<bibliothèque Python>`.
 
-Pour installer `pip`, il faut installer le paquet `python3-pip` via `apt`.
+Pour installer `pip`, installez le paquet `python3-pip` via `apt`.
 
 ```bash
-su # metter cette commande pour passer en root
-apt update # optionnel, si vous n'avez pas fait de mise a jour depuis longtemps
+su # utilisez cette commande pour passer en root
+apt update # facultatif, si vous n'avez pas effectué de mise à jour depuis longtemps
 apt install python3-pip
 ```
 
-Après, vous pouvez installer des librairies Python.
+Vous pouvez ensuite installer des bibliothèques Python.
 
-> **Attention** : dans certain cas, écrire `pip` ne suffit pas, il faut utiliser `python3 -m pip`. Vous pouvez aussi essayer `pip3`.
+> **Attention** : dans certains cas, saisir `pip` ne suffit pas ; il faut utiliser `python3 -m pip`. Vous pouvez également essayer `pip3`.
 
 ### Installation de librairie Python
 
-Pour installer une librairie Python (ou autre package Python), écriver la commande :
+Pour installer une bibliothèque Python (ou un autre paquet Python), saisissez la commande suivante :
 
 ```bash
 python3 -m pip install <nom de la librairie>
 ```
 
-La commande suivante peut aussi fonctionner dans certain cas :
+La commande suivante peut également fonctionner dans certains cas :
 
 ```bash
 pip3 install <nom de la librairie>
@@ -64,11 +64,11 @@ pip3 install <nom de la librairie>
 
 Python venv est un module qui permet de créer des environnements virtuels Python. Cela permet d'isoler les dépendances d'un projet Python.
 
-Pour installer `python3-venv`, il faut installer le paquet via `apt`.
+Pour installer `python3-venv`, installez le paquet via `apt`.
 
 ```bash
-su # metter cette commande pour passer en root
-apt update # optionnel, si vous n'avez pas fait de mise a jour depuis longtemps
+su # utilisez cette commande pour passer en root
+apt update # facultatif, si vous n'avez pas effectué de mise à jour depuis longtemps
 apt install python3-venv
 ```
 

@@ -1,58 +1,58 @@
-# Connection ssh
+# Connexion SSH
 
-La connection ssh permet de se connecter à distance (avec un autre ordinateur) au STM32. Vous avez accès à la console du STM32 et vous pouvez transférer des fichiers.
+La connexion SSH permet de se connecter à distance au STM32 depuis un autre ordinateur. Vous avez accès à la console du STM32 et pouvez transférer des fichiers.
 
-## Connection
+## Connexion
 
-Par défaut, le ssh est activer sur le STM32. Il est donc facile de ce connecter.
+Par défaut, le serveur SSH est activé sur le STM32. Il est donc facile de s'y connecter.
 
-Voici les étapes a suivre :
+Voici les étapes à suivre :
 
-### Trouver l'adress ip
+### Trouver l'adresse IP
 
-Il vous faut connaitre l'adress ip du STM32.
+Vous devez connaître l'adresse IP du STM32.
 
 ```bash
 ip a
 ```
 
-Cette commande affiche plusieurs adress ip. **Attention : un seul est la bonne**. Pour la trouver, si vous vous être connecter en wifi, l'adress ip sera dans la section `wlan0`. Si vous êtes conencter autrement, l'adress ip sera dans une autre section. En suite, l'adress ip commence souvent par `192.168` ou `10.0`.
+Cette commande affiche plusieurs adresses IP. **Attention : une seule est la bonne.** Pour la trouver, si vous êtes connecté en Wi-Fi, l'adresse IP se trouve dans la section `wlan0`. Si vous êtes connecté autrement, elle se trouve dans une autre section. En général, l'adresse IP commence par `192.168` ou `10.0`.
 
-Si vous ne saver pas quelle adress ip, vous pouvez tester les différentes adress ip lors de la connection ssh...
+Si vous ne savez pas quelle est la bonne adresse IP, vous pouvez tester les différentes adresses IP lors de la connexion SSH.
 
-### Connection ssh
+### Connexion SSH
 
 Depuis un autre ordinateur, écrivez la commande :
 
 ```bash
-ssh root@<adress ip>
+ssh root@<adresse_ip>
 ```
 
-> Par défaut, il n'y a pas de mot de passe. Mais vous aurez surement un message d'avertissement. Ecriver `yes` si cela arrive...
+> Par défaut, il n'y a pas de mot de passe. Vous aurez cependant probablement un message d'avertissement. Saisissez `yes` si cela arrive.
 
-Si la connection a fonctionner, vous devait voir le prompt du STM32 (connecter sur root).
+Si la connexion a fonctionné, vous devriez voir l'invite de commande du STM32 (connecté en tant que root).
 
-> Dans cette exemple, l'utilisateur pour le ssh sur le STM32 est `root`. Mais si vous n'avez pas besoin d'être administrateur, vous pouvez vous connecter sur `weston` (un utilisateur non root présent sur le STM32). Utiliser la même commande que pour `root` en remplacant `root` par `weston`.
+> Dans cet exemple, l'utilisateur SSH du STM32 est `root`. Si vous n'avez pas besoin des droits d'administrateur, vous pouvez vous connecter avec l'utilisateur `weston` (un utilisateur non root présent sur le STM32). Utilisez la même commande qu'avec `root`, en remplaçant `root` par `weston`.
 
-### Fin de la connection
+### Fin de la connexion
 
-Utiliser simplement le racoursis clavier `Ctrl + D` (sur votre ordinateur) pour fermer la connection ssh.
+Utilisez simplement le raccourci clavier `Ctrl + D` sur votre ordinateur pour fermer la connexion SSH.
 
 
-## Transfert de fichier
+## Transfert de fichiers
 
-Vous pouvez utiliser le ssh pour transférer des fichiers entre votre ordinateur et le STM32. Vous pouvez envoyer ou recevoir des fichiers. Utiliser la commande `scp` :
+Vous pouvez utiliser SSH pour transférer des fichiers entre votre ordinateur et le STM32. Vous pouvez envoyer ou recevoir des fichiers avec la commande `scp` :
 
 ### Envoyer un fichier
 
 ```bash
-scp fichier.txt root@<adress ip>:/chemin/de/la/copie/
+scp fichier.txt root@<adresse_ip>:/chemin/de/la/copie/
 ```
 
 ### Recevoir un fichier
 
 ```bash
-scp root@<adress ip>:/chemin/du/fichier.txt ./
+scp root@<adresse_ip>:/chemin/du/fichier.txt ./
 ```
 
-> Metter `./` a la fin de la commande pour récupérer le fichier dans le dossier courant, sinon metter le chemin du dossier de destination.
+> Placez `./` à la fin de la commande pour récupérer le fichier dans le dossier courant. Sinon, indiquez le chemin du dossier de destination.

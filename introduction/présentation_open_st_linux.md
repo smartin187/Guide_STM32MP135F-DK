@@ -1,103 +1,103 @@
-# Présentation de Open St Linux
+# Présentation d'Open ST Linux
 
-Open ST Linux est une distribution minimaliste embarqué, qui peut être utiliser sur le STM32-MP1.
+Open ST Linux est une distribution Linux embarquée et minimaliste, qui peut être utilisée sur le STM32MP1.
 
 Elle est construite avec Yocto.
 
 ## Installation d'Open ST Linux
 
-En général une carte micro SD est fournie avec le STM32MP1-DK avec Open ST Linux déjà installer. Mais si vous avez besion de réinstaller Open ST Linux, par exemple sur une nouvele carte ou en cas de casse système, voici comment installer Open ST Linux (sur carte micro SD ou autre support de stockage) :
+En général, une carte microSD est fournie avec le STM32MP1-DK et Open ST Linux est déjà installé. Si vous avez besoin de réinstaller Open ST Linux, par exemple sur une nouvelle carte ou à la suite d'une panne du système, voici comment procéder sur une carte microSD ou un autre support de stockage :
 
 ### Récupérer l'image d'Open ST Linux
 
-Récupérer Open ST Linux sur GitHub, et cherche l'image officiel ou utiliser Yocto : [Open ST Linux](https://github.com/STMicroelectronics/meta-st-openstlinux). Si cela est compliquer, utiliser l'image de ce dépot (voir ci-dessous).
+Récupérez Open ST Linux sur GitHub et cherchez l'image officielle, ou utilisez Yocto : [Open ST Linux](https://github.com/STMicroelectronics/meta-st-openstlinux). Si cette procédure est trop compliquée, utilisez l'image de ce dépôt (voir ci-dessous).
 
-> Si Récupérer Open ST Linux est trop compiliquer, vous trouverez une image prête dans les releases de ce dépot **en cas de backup** : [image Open ST Linux](https://github.com/smartin187/STM32_MP1_Bidulab/releases/tag/ajout_backup). Pour installer l'image, télécharger l'archive zip, décompresser et utiliser `dd` pour copier l'image sur la carte micro SD. Toutes les commandes sont dans la realise.<br>Mais attention : **cette image n'est pas forcément la version la plus récente d'Open ST Linux**.
+> Si récupérer Open ST Linux est trop compliqué, vous trouverez une image prête dans les versions publiées de ce dépôt, **à utiliser comme sauvegarde** : [image Open ST Linux](https://github.com/smartin187/STM32_MP1_Bidulab/releases/tag/ajout_backup). Pour installer l'image, téléchargez l'archive ZIP, décompressez-la et utilisez `dd` pour la copier sur la carte microSD. Toutes les commandes se trouvent dans la release.<br>Mais attention : **cette image n'est pas forcément la version la plus récente d'Open ST Linux**.
 
 ## Gestionnaire de paquet
 
-Open ST Linux utilise `apt` pour installer des paquets. Mais attention : Open ST Linux n'utilise pas les dépôts officiels Debian/Ubuntu, mais un dépôt de ST. Pas tout les packet seront disponible sur ce dépot...
+Open ST Linux utilise `apt` pour installer des paquets. Mais attention : Open ST Linux n'utilise pas les dépôts officiels Debian ou Ubuntu, mais un dépôt de ST. Tous les paquets ne seront pas forcément disponibles sur ce dépôt.
 
-L'outil `dpkg` est donc installer si vous avez besoin d'installer des packages `*.deb` manuellement. Voir [installation d'application](#installation-dapplication).
+L'outil `dpkg` est donc installé si vous avez besoin d'installer manuellement des paquets `*.deb`. Consultez la section [Installation d'une application](#installation-dapplication).
 
 ## Interface graphique
 
-Cette distribution a une interface graphique, qui est Wayland avec Weston. C'est donc une interface simple, mais elle permet quand même de faire des applications graphiques.
+Cette distribution possède une interface graphique basée sur Wayland avec Weston. Il s'agit d'une interface simple, mais elle permet tout de même d'exécuter des applications graphiques.
 
-Noter que certaines application ne pourront pas fonctionner : les application utilisant X11. Dans la pluspart des distribution utilisant Wayland, il y a `XWayland` qui permet que les application X11 fonctionne sur Wayland. Open ST Linux, distribution minimaliste, n'a pas `XWayland`...
+Notez que certaines applications ne pourront pas fonctionner, notamment celles qui utilisent X11. Dans la plupart des distributions utilisant Wayland, `XWayland` permet aux applications X11 de fonctionner sur Wayland. Open ST Linux, qui est une distribution minimaliste, n'inclut pas `XWayland`.
 
 ## Installation d'application
 
-L'installation d'application peut être compliquer dans certain cas.
+L'installation d'une application peut être compliquée dans certains cas.
 
-Pour installer une application, vérifier quelle sera suporté par le STM32 pour les ressource matériel.
+Avant d'installer une application, vérifiez qu'elle est compatible avec le STM32 et ses ressources matérielles.
 
-Le STM32 a un processeur `ARM`, 32 bits. Les architecture supporté sont `armhf` et `armel`.
+Le STM32 possède un processeur `ARM` 32 bits. Les architectures prises en charge sont `armhf` et `armel`.
 
 Si une application n'est pas disponible dans le dépôt ST, mais qu'elle est disponible en `armhf` ou `armel`, vous pouvez tenter de l'installer manuellement.
 
-> Attention : certaines applications pourrait endomager votre système si il y a des conflits de dépendences. Soiyez prudent si il y a des dépendences.
+> Attention : certaines applications pourraient endommager votre système en cas de conflit entre dépendances. Soyez prudent avec les dépendances.
 
 ### Installation
 
 Il peut y avoir plusieurs méthodes pour installer une application.
 
-> Noublier pas que pour les application graphique, il ne faut pas que l'application utilise `X11`.
+> N'oubliez pas que les applications graphiques ne doivent pas utiliser `X11`.
 
 #### Installation via `.deb`
 
 Si l'application est disponible sur les dépôts officiels Debian/Ubuntu, vous pouvez télécharger le fichier `.deb` depuis un ordinateur puis le transférer sur le STM32 et enfin l'installer avec `dpkg`.
 
-1) Télécharger le package :
+1. Téléchargez le paquet :
 
 **Option 1 : télécharger via apt :**
 ```bash
 apt download <nom_du_package:armhf>
 ```
 
-> Attention a bien installer le package en `armhf` ou `armel` via apt. Il est possible que vous deviez faire la commande `sudo dpkg --add-architecture armhf` pour ajouter l'architecture `armhf`, **mais attention de ne pas "polluer" votre système**. Vous pouvez sinon utiliser Docker pour télécharger. Sinon faite l'option 2.
+> Veillez à installer le paquet dans l'architecture `armhf` ou `armel` via `apt`. Il est possible que vous deviez exécuter la commande `sudo dpkg --add-architecture armhf` pour ajouter l'architecture `armhf`, **mais attention à ne pas « polluer » votre système**. Vous pouvez aussi utiliser Docker pour le télécharger. Sinon, choisissez l'option 2.
 
-**Option 2 : télécharger le packet en ligne :**
+**Option 2 : télécharger le paquet en ligne :**
 
-Vous pouvez aussi télécharger le package sur le site de Debian ou Ubuntu.
+Vous pouvez également télécharger le paquet depuis le site de Debian ou d'Ubuntu.
 
 - [Installation via Debian](https://packages.debian.org/search?suite=stable&section=all&arch=any&searchon=names&keywords=package)
 - [Installation via Ubuntu](https://packages.ubuntu.com/)
 
-2) Installation sur STM32 :
+2. Installez le paquet sur le STM32 :
 
 ```bash
-dpkg -i <nom_du_package>.deb    # vous devez être en administrateur, utiliser la commande su pour ouvrir un terminal root.
+dpkg -i <nom_du_package>.deb    # vous devez être administrateur ; utilisez su pour ouvrir un terminal root.
 ```
 
-> Soyez très prudent avec les dépendences ! Si des dépendences sont incompatible vous risquer d'endomager votre système !
+> Soyez très prudent avec les dépendances ! Si des dépendances sont incompatibles, vous risquez d'endommager votre système !
 
 #### Installation manuelle
 
-Si vous avez moyen de récupérer les binaire Linux de l'application, vous pouvez les exécuter a la condition que le binaire soit `armhf` ou `armel`.
+Si vous pouvez récupérer les binaires Linux de l'application, vous pouvez les exécuter à condition qu'ils soient en `armhf` ou en `armel`.
 
-Dans ce cas, transférer seulement le/les binaire(s) sur le STM32 et les exécuter.
+Dans ce cas, transférez le ou les binaires sur le STM32 et exécutez-les.
 
 ## Limitation
 
-Cette distribution est minimaliste, certaines applications ou commandes ne sont pas installer par défaut. Certaines seront installable direcement avec le dépot ST, d'autre non.
+Cette distribution est minimaliste : certaines applications ou commandes ne sont pas installées par défaut. Certaines pourront être installées directement depuis le dépôt ST, d'autres non.
 
-Voici les principales choses a savoir :
+Voici les principales choses à savoir :
 
 ### Pas de `sudo`
 
 Cette distribution n'a pas la commande `sudo`.
 
-Il n'est pas difficile pour autant d'éxécuter des commande administrateur.
+Il n'est toutefois pas difficile d'exécuter des commandes d'administration.
 
-Il faut utiliser la commande `su`, voici les possibilités :
-1) Ecrire la commande `su`. Un terminal root s'ouvrira, vous pourrez éxécuter des commandes administrateur, mais attention, car toutes les commandes seront en root a partire de ce moment (jusqu'à ce que vous fermiez le terminal root).
-2) Ecrire la commande `su -c "<commande>"`. Si vous voulez éxécuter une seule commmande en root, utiliser cette commande.
+Il faut utiliser la commande `su`. Voici les possibilités :
+1. Saisissez la commande `su`. Un terminal root s'ouvrira et vous pourrez exécuter des commandes d'administration. Attention, toutes les commandes seront alors exécutées en tant que root jusqu'à la fermeture du terminal root.
+2. Saisissez la commande `su -c "<commande>"` pour exécuter une seule commande en tant que root.
 
-> Noter que si vous utiliser cette commande, si vous accéder au dossier personnel de l'utilisateur où vous avez éxécuter la commande, vous ne devez pas écrire `~`, car cela dirigera vers le dossier personnel de root. Utiliser les chemain complet dans ce cas...
+> Notez que si vous utilisez cette commande pour accéder au dossier personnel d'un utilisateur, vous ne devez pas écrire `~`, car cela désignera le dossier personnel de root. Utilisez le chemin complet dans ce cas.
 
 ### Pas de `XWayland`
 
-Dans la pluspart des distribution utilisant Wayland, il y a `XWayland` qui permet que les application X11 fonctionne sur Wayland. Open ST Linux, distribution minimaliste, n'a pas `XWayland`...
+Dans la plupart des distributions utilisant Wayland, `XWayland` permet aux applications X11 de fonctionner sur Wayland. Open ST Linux, qui est une distribution minimaliste, n'inclut pas `XWayland`.
 
 
